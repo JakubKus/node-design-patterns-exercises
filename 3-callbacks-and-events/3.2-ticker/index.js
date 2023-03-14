@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 
-const ticker = (totalMs, cb) => {
+const ticker = (totalMs = 0, cb) => {
   const emitter = new EventEmitter();
   let tickCount = 0, msPassed = 0;
 
