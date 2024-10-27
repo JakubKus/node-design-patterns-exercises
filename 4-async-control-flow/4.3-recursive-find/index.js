@@ -23,13 +23,15 @@ const ParallelFinder = params => {
     };
   });
 
-  const finish = () => cb(searchedFilesFound);
+  const finish = err => err ? cb(err) : cb(searchedFilesFound);
 
   const next = () => {
     while (running < CONCURRENCY && taskIdx < tasks.length) {
       const task = tasks[taskIdx++];
-      task(() => {
+      task((err) => {
+        if (err) return finish(err);
         if (++tasksCompleted === tasks.length) return finish();
+
         running--;
         next();
       });
