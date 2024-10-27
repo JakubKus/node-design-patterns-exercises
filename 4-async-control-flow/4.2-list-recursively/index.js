@@ -22,11 +22,8 @@ const listNestedFiles = (dir, cb) => {
       }
     });
 
-    if (--dirEnteredCount === 0) cb(null, filesFound);
+    if (--dirEnteredCount === 0) cb(filesFound);
   });
 };
 
-listNestedFiles('../', (err, files) => {
-  if (err) console.error(err.message);
-  else if (files) console.log({ files });
-});
+listNestedFiles('../', console.log);
